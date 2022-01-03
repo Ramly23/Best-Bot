@@ -1,5 +1,7 @@
 require("dotenv").config()
 
+const generateImage = require("./generateImage")
+
 const Discord = require('discord.js')
 const client = new Discord.Client({
   intents: [
@@ -34,6 +36,22 @@ client.on('message' , msg => {
     msg.react("❤️")
   }
 
+  else if (msg.content == "stupid") {
+    msg.reply("no no no, i'm not stupid");
+  }
+
+  else if (msg.content == "you gay") {
+    msg.reply("nope ur the one gay");
+  }
+
+  else if (msg.content == "lol") {
+    msg.reply("HAHAHA");
+  }
+
+  else if (msg.content == "valo" || msg.content == "valo?") {
+    msg.reply("Let's go!!")
+  }
+
   else if (msg.content === `${BOT_PREFIX}${ONETAP_COMMAND}`) {
     modUser(msg.member)
   }
@@ -42,5 +60,16 @@ client.on('message' , msg => {
     member.roles.add("870536088647762011");
   }
 })
+
+const welcomeChannelId = "832225260052414479"
+
+cilent.on("guildMemberAdd" , async (member) => {
+  const img = await generateImage(member)
+  member.guild.channels.cache.get(welcomeChannelId).send({
+    content: `<@${member.id}> Welcome to the server!`,
+    files: [img]
+  })
+})
+
 
 client.login(process.env.BOT_TOKEN)
