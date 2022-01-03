@@ -63,7 +63,7 @@ client.on('message' , msg => {
 
 const welcomeChannelId = "832225260052414479"
 
-cilent.on("guildMemberAdd" , async (member) => {
+client.on("guildMemberAdd" , async (member) => {
   const img = await generateImage(member)
   member.guild.channels.cache.get(welcomeChannelId).send({
     content: `<@${member.id}> Welcome to the server!`,
